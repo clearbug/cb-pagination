@@ -1,0 +1,39 @@
+.cb-simple-pagination {
+    list-style-type: none;
+    font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0;
+    color: #777;
+    background-color: #fff;
+}
+.cb-simple-pagination li {
+    display: inline-block;
+    border: 1px solid #ddd;
+    font-size: 18px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.cb-simple-pagination li:hover {
+    background-color: #eee;
+}
+.cb-simple-pagination li:first-child {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+.cb-simple-pagination li:last-child {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.cb-simple-pagination li.not-allowed {
+    cursor: not-allowed;
+}
+.cb-simple-pagination li.not-allowed:hover {
+    background-color: #fff;
+}
+.cb-simple-pagination li.active {
+    cursor: default;
+    background-color: #ddd;
+}
+.cb-simple-pagination li.active:hover {
+    background-color: #ddd;
+}

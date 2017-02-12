@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>Parse Expression Example</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/simplePagination.css">
+    <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    <div class="container" ng-controller="myController">
+        <div class="row" style="margin-top: 20px;">
+            <div simple-pagination total-items="pager.totalItems" items-per-page="pager.itemsPerPage" max-items-num="pager.maxItemsNum" current-page-no="currentPageNo" change-page-no="toSearch()"></div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="directives/simplePagination.js"></script>
+<script type="text/javascript">
+    angular.module('myApp', ['cbPagination'])
+        .controller('myController', function($scope, $timeout){
+            $scope.currentPageNo = 1;
+            
+            $scope.pager = {
+                totalItems: 33,
+                itemsPerPage: 10,
+                maxItemsNum: 5
+            };
+            
+            $scope.toSearch = function(){
+                console.log('To search ' + $scope.currentPageNo);
+            };
+        });
+</script>
+</html>

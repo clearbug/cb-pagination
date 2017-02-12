@@ -1,0 +1,5 @@
+<ul class="cb-simple-pagination">
+  <li ng-class="currentPageNo===1?'not-allowed':''" ng-click="prevPage()" onselectstart="return false;">上一页</li>
+  <li ng-repeat="pageNo in pageNos" ng-bind="pageNo" ng-class="pageNo===currentPageNo?'active':''" ng-click="changeCurrentPageNo(pageNo)" onselectstart="return false;"></li>
+  <li ng-class="currentPageNo===pageNos[pageNos.length - 1]?'not-allowed':''" ng-click="nextPage()" onselectstart="return false;">下一页</li>
+</ul>
