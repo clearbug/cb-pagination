@@ -8,32 +8,30 @@ angular.module('cbPagination', [])
                 pager: '=pager'
             },
             controller: function($scope, $timeout){
-                $scope.$watch('pager.currentPageNo', function(newValue, oldValue, scope){
+                $scope.$watch('pager.pageNo', function(newValue, oldValue, scope){
                     $scope.render();
                 });
                 $scope.render = function(){
                     $scope.pageNos = [];
-                    var totalPages = $scope.pager.totalItems / $scope.pager.itemsPerPage;
+                    var totalPages = $scope.pager.total / $scope.pager.pageSize;
                     for(var i = 0; i < totalPages; i++){
                         $scope.pageNos.push(i + 1);
                     }
-                    if($scope.pageNos.length > $scope.pager.maxShowPageNos){
-                        // TODO: 处理页码显示过多问题
-                    }
+                    // TODO: 处理页码显示过多问题
                 };
                 $scope.prevPage = function(){
-                    if($scope.pager.currentPageNo > 1){
-                        $scope.changeCurrentPageNo($scope.pager.currentPageNo - 1);
+                    if($scope.pager.pageNo > 1){
+                        $scope.changeCurrentPageNo($scope.pager.pageNo - 1);
                     }
                 };
                 $scope.nextPage = function(){
-                    if($scope.pager.currentPageNo < $scope.pageNos[$scope.pageNos.length - 1]){
-                        $scope.changeCurrentPageNo($scope.pager.currentPageNo + 1);
+                    if($scope.pager.pageNo < $scope.pageNos[$scope.pageNos.length - 1]){
+                        $scope.changeCurrentPageNo($scope.pager.pageNo + 1);
                     }
                 };
                 $scope.changeCurrentPageNo = function(pageNo){
                     console.log(pageNo);
-                    $scope.pager.currentPageNo = pageNo;
+                    $scope.pager.pageNo = pageNo;
                     $scope.pager.changePageNo();
                 };
             },

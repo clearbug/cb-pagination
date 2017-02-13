@@ -22,14 +22,13 @@
     angular.module('myApp', ['cbPagination'])
         .controller('myController', function($scope, $timeout){
             $scope.toSearch = function(){
-                console.log('To search ' + $scope.pager.currentPageNo);
+                console.log('To search ' + $scope.pager.pageNo);
             };
             
             $scope.pager = {
-                totalItems: 83,
-                itemsPerPage: 10,
-                maxShowPageNos: 5,
-                currentPageNo: 1,
+                total: 83,
+                pageSize: 10,
+                pageNo: 1,
                 changePageNo: $scope.toSearch
             };
             
