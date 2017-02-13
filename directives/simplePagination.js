@@ -8,9 +8,9 @@ angular.module('cbPagination', [])
                 pager: '=pager'
             },
             controller: function($scope, $timeout){
-                /*$scope.$watch('pager.pageNo', function(newValue, oldValue, scope){
+                $scope.$watch('pager.total', function(newValue, oldValue, scope){
                     $scope.render();
-                });*/
+                });
 
                 $scope.render = function(){
                     $scope.pageNos = [];
