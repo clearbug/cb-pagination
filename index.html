@@ -13,7 +13,7 @@
 <body>
     <div class="container" ng-controller="myController">
         <div class="row" style="margin-top: 20px;">
-            <div simple-pagination total-items="pager.totalItems" items-per-page="pager.itemsPerPage" max-items-num="pager.maxItemsNum" current="current" change-page-no="toSearch()"></div>
+            <div simple-pagination pager="pager"></div>
         </div>
     </div>
 </body>
@@ -21,19 +21,20 @@
 <script type="text/javascript">
     angular.module('myApp', ['cbPagination'])
         .controller('myController', function($scope, $timeout){
-            //$scope.currentPageNo = 1;
-
-            $scope.current = { pageNo: 1 };
+            $scope.toSearch = function(){
+                console.log('To search ' + $scope.pager.currentPageNo);
+            };
             
             $scope.pager = {
-                totalItems: 33,
+                totalItems: 83,
                 itemsPerPage: 10,
-                maxItemsNum: 5
+                maxItemsNum: 5,
+                currentPageNo: 1,
+                changePageNo: function(){
+                    $scope.toSearch();
+                }
             };
             
-            $scope.toSearch = function(){
-                console.log('To search ' + $scope.current.pageNo);
-            };
            /* $timeout(function(){
                 console.log('Timeout: ' + $scope.currentPageNo);
             }, 3000);*/
