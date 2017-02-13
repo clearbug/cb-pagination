@@ -14,7 +14,10 @@ angular.module('cbPagination', [])
 
                 $scope.render = function(){
                     $scope.pageNos = [];
-                    var totalPages = $scope.pager.total / $scope.pager.pageSize;
+                    var totalPages = Math.ceil($scope.pager.total / $scope.pager.pageSize);
+                    if(totalPages > 0 && ($scope.pager.pageNo < 1 || $scope.pager.pageNo > totalPages)){
+                        $scope.pager.pageNo = 1;
+                    }
                     for(var i = 0; i < totalPages; i++){
                         $scope.pageNos.push(i + 1);
                     }
