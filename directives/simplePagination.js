@@ -17,6 +17,9 @@ angular.module('cbPagination', [])
                     for(var i = 0; i < totalPages; i++){
                         $scope.pageNos.push(i + 1);
                     }
+                    if($scope.pageNos.length > $scope.pager.maxShowPageNos){
+                        // TODO: 处理页码显示过多问题
+                    }
                 };
                 $scope.prevPage = function(){
                     if($scope.pager.currentPageNo > 1){

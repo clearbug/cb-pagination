@@ -28,11 +28,9 @@
             $scope.pager = {
                 totalItems: 83,
                 itemsPerPage: 10,
-                maxItemsNum: 5,
+                maxShowPageNos: 5,
                 currentPageNo: 1,
-                changePageNo: function(){
-                    $scope.toSearch();
-                }
+                changePageNo: $scope.toSearch
             };
             
            /* $timeout(function(){
