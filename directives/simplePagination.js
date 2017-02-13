@@ -30,9 +30,10 @@ angular.module('cbPagination', [])
                     }
                 };
                 $scope.changeCurrentPageNo = function(pageNo){
-                    console.log(pageNo);
-                    $scope.pager.pageNo = pageNo;
-                    $scope.pager.changePageNo();
+                    if($scope.pager.pageNo !== pageNo){
+                        $scope.pager.pageNo = pageNo;
+                        $scope.pager.changePageNo();
+                    }
                 };
             },
             link: function(scope, iElement, iAttrs){
