@@ -8,11 +8,11 @@ angular.module('cbPagination', [])
                 totalItems: '=totalItems',
                 itemsPerPage: '=itemsPerPage',
                 maxItemsNum: '=maxItemsNum',
-                currentPageNo: '=currentPageNo',
+                current: '=current',
                 changePageNo: '&changePageNo'
             },
-            controller: function($scope){
-                $scope.$watch('currentPageNo', function(newValue, oldValue, scope){
+            controller: function($scope, $timeout){
+                $scope.$watch('current.pageNo', function(newValue, oldValue, scope){
                     $scope.render();
                 });
                 $scope.render = function(){
@@ -23,19 +23,18 @@ angular.module('cbPagination', [])
                     }
                 };
                 $scope.prevPage = function(){
-                    if($scope.currentPageNo > 1){
-                        $scope.changeCurrentPageNo($scope.currentPageNo - 1);
+                    if($scope.current.pageNo > 1){
+                        $scope.changeCurrentPageNo($scope.current.pageNo - 1);
                     }
                 };
                 $scope.nextPage = function(){
-                    if($scope.currentPageNo < $scope.pageNos[$scope.pageNos.length - 1]){
-                        $scope.changeCurrentPageNo($scope.currentPageNo + 1);
+                    if($scope.current.pageNo < $scope.pageNos[$scope.pageNos.length - 1]){
+                        $scope.changeCurrentPageNo($scope.current.pageNo + 1);
                     }
                 };
                 $scope.changeCurrentPageNo = function(pageNo){
-                    debugger
                     console.log(pageNo);
-                    $scope.currentPageNo = pageNo;
+                    $scope.current.pageNo = pageNo;
                     $scope.changePageNo();
                 };
             },
