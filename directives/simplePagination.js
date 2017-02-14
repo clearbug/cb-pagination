@@ -16,8 +16,11 @@ angular.module('cbPagination', [])
                 });
 
                 $scope.render = function(){
-                    $scope.pageNos = [];
+
+                    $scope.pages = [];
+                    
                     var totalPages = Math.ceil($scope.pager.total / $scope.pager.pageSize);
+
                     if(totalPages > 0 && ($scope.pager.pageNo < 1 || $scope.pager.pageNo > totalPages)){
                         $scope.pager.pageNo = 1;
                     }
@@ -25,6 +28,7 @@ angular.module('cbPagination', [])
                     var startPage = 1;
                     var endPage = totalPages;
                     var isMaxSized = $scope.pager.maxSize < totalPages;
+
                     if(isMaxSized){
                         // Current page is displayed in the middle of the visible ones
                         startPage = Math.max($scope.pager.pageNo - Math.floor($scope.pager.maxSize / 2), 1);
@@ -36,8 +40,28 @@ angular.module('cbPagination', [])
                             startPage = endPage - $scope.pager.maxSize + 1;
                         }
                     }
-                    for(var i = startPage; i <= endPage; i++){
-                        $scope.pageNos.push(i);
+
+                    for(var number = startPage; number <= endPage; number++){
+                        var page = makePage(number, number, number === $scope.pager.pageNo);
+                        $scope.pages.push(page);
+                    }
+
+                    if(isMaxSized){
+                        if(startPage > 1){
+                            var previousPageSet = makePage(startPage - 1, '...', false);
+                            $scope.pages.unshift(previousPageSet);
+                        }
+                        if(endPage < totalPages){
+                            var nextPageSet = makePage(endPage + 1, '...', false);
+                            $scope.pages.push(nextPageSet);
+                        }
+                    }
+
+                    if($scope.pages[0].text !== 1){
+                        $scope.pages.unshift(makePage(1, 1, false));
+                    }
+                    if($scope.pages[$scope.pages.length -1].text !== totalPages){
+                        $scope.pages.push(makePage(totalPages, totalPages, false));
                     }
                 };
 
@@ -48,7 +72,7 @@ angular.module('cbPagination', [])
                 };
 
                 $scope.nextPage = function(){
-                    if($scope.pager.pageNo < $scope.pageNos[$scope.pageNos.length - 1]){
+                    if($scope.pager.pageNo < $scope.pages[$scope.pages.length - 1].number){
                         $scope.changeCurrentPageNo($scope.pager.pageNo + 1);
                     }
                 };
@@ -61,7 +85,14 @@ angular.module('cbPagination', [])
                     }
                 };
 
-                $scope.render();
+                // Create page object used in template
+                function makePage(number, text, isActive){
+                    return {
+                        number: number,
+                        text: text,
+                        active: isActive
+                    };
+                }
             },
             link: function(scope, iElement, iAttrs){
                 

@@ -1,5 +1,5 @@
-<ul class="cb-simple-pagination" ng-show="pageNos.length > 0">
+<ul class="cb-simple-pagination" ng-show="pages.length > 0">
   <li ng-class="pager.pageNo===1?'not-allowed':''" ng-click="prevPage()" onselectstart="return false;">上一页</li>
-  <li ng-repeat="pageNo in pageNos" ng-bind="pageNo" ng-class="pageNo===pager.pageNo?'active':''" ng-click="changeCurrentPageNo(pageNo)" onselectstart="return false;"></li>
-  <li ng-class="pager.pageNo===pageNos[pageNos.length - 1]?'not-allowed':''" ng-click="nextPage()" onselectstart="return false;">下一页</li>
+  <li ng-repeat="page in pages" ng-bind="page.text" ng-class="page.active?'active':''" ng-click="changeCurrentPageNo(page.number)" onselectstart="return false;"></li>
+  <li ng-class="pager.pageNo===pages[pages.length - 1].number?'not-allowed':''" ng-click="nextPage()" onselectstart="return false;">下一页</li>
 </ul>
