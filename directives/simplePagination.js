@@ -8,6 +8,9 @@ angular.module('cbPagination', [])
                 pager: '=pager'
             },
             controller: function($scope, $timeout){
+
+                $scope.pager.maxSize = angular.isDefined($scope.pager.maxSize) ? $scope.pager.maxSize : 10;
+
                 $scope.$watch('pager.total', function(newValue, oldValue, scope){
                     $scope.render();
                 });
@@ -18,10 +21,24 @@ angular.module('cbPagination', [])
                     if(totalPages > 0 && ($scope.pager.pageNo < 1 || $scope.pager.pageNo > totalPages)){
                         $scope.pager.pageNo = 1;
                     }
-                    for(var i = 0; i < totalPages; i++){
-                        $scope.pageNos.push(i + 1);
+
+                    var startPage = 1;
+                    var endPage = totalPages;
+                    var isMaxSized = $scope.pager.maxSize < totalPages;
+                    if(isMaxSized){
+                        // Current page is displayed in the middle of the visible ones
+                        startPage = Math.max($scope.pager.pageNo - Math.floor($scope.pager.maxSize / 2), 1);
+                        endPage = startPage + $scope.pager.maxSize - 1;
+
+                        // Adjust if limit is exceeded
+                        if(endPage > totalPages){
+                            endPage = totalPages;
+                            startPage = endPage - $scope.pager.maxSize + 1;
+                        }
                     }
-                    // TODO: 处理页码显示过多问题
+                    for(var i = startPage; i <= endPage; i++){
+                        $scope.pageNos.push(i);
+                    }
                 };
 
                 $scope.prevPage = function(){
@@ -40,6 +57,7 @@ angular.module('cbPagination', [])
                     if($scope.pager.pageNo !== pageNo){
                         $scope.pager.pageNo = pageNo;
                         $scope.pager.changePageNo();
+                        $scope.render();
                     }
                 };
 

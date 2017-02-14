@@ -11,6 +11,9 @@
     font-size: 18px;
     padding: 5px 10px;
     cursor: pointer;
+    width: 38px;
+    height: 38px;
+    text-align: center;
 }
 .cb-simple-pagination li:hover {
     background-color: #eee;
@@ -18,10 +21,12 @@
 .cb-simple-pagination li:first-child {
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
+    width: auto;
 }
 .cb-simple-pagination li:last-child {
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
+    width: auto;
 }
 
 .cb-simple-pagination li.not-allowed {

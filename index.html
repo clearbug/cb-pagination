@@ -23,19 +23,16 @@
         .controller('myController', function($scope, $timeout){
             $scope.toSearch = function(){
                 console.log('To search ' + $scope.pager.pageNo);
-                $scope.pager.total = 33;
+                $scope.pager.total = 166;
             };
             
             $scope.pager = {
-                total: 83,
+                total: 113,
                 pageSize: 10,
                 pageNo: 1,
                 changePageNo: $scope.toSearch
             };
             
-           /* $timeout(function(){
-                console.log('Timeout: ' + $scope.currentPageNo);
-            }, 3000);*/
         });
 </script>
 </html>
